@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <link rel="icon" href="z.jpg">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffcccc;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        h1 {
+            color: #d63384;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            margin: 10px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .yes {
+            background-color: #ff4081;
+            color: white;
+            position: relative; /* Permanece estático */
+        }
+
+        .no {
+            background-color: #ccc;
+            color: black;
+            position: relative;
+        }
+
+        /* Estilos románticos para la pantalla de respuesta positiva */
+        .love-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ff4d6d, #ff80b3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: white;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .love-screen h1 {
+            font-size: 3rem;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Estilo mejorado para el mensaje especial */
+        .love-message {
+            font-size: 2.8rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #ffdd57, #ff69b4, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 3px 3px 8px rgba(255, 255, 255, 0.4);
+            animation: glow 2s infinite alternate;
+        }
+
+        /* Animación de brillos */
+        @keyframes glow {
+            0% {
+                text-shadow: 3px 3px 8px rgba(255, 255, 255, 0.4);
+            }
+            100% {
+                text-shadow: 3px 3px 12px rgba(255, 255, 255, 0.8);
+            }
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Animación de corazones */
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            animation: float 5s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>¿Quieres ser mi San Valentín? ❤️</h1>
+    <img src="jsjs.png" height="300px" width="300px">
+    <div class="buttons">
+        <button class="btn yes" id="yesBtn" onclick="showLoveScreen()">Sí ❤️</button>
+        <button class="btn no" id="noBtn">No 😢</button>
+    </div>
+
+    <script>
+        let noBtn = document.getElementById("noBtn");
+
+        function moveButton() {
+            let min = 50; // Mínimo margen para que no se salga de la pantalla
+            let maxWidth = window.innerWidth - noBtn.offsetWidth - min;
+            let maxHeight = window.innerHeight - noBtn.offsetHeight - min;
+
+            let x = Math.random() * (maxWidth - min) + min;
+            let y = Math.random() * (maxHeight - min) + min;
+
+            noBtn.style.position = "fixed";
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        // Mueve el botón "No" solo cuando el mouse se acerca
+        noBtn.addEventListener("mouseenter", moveButton);
+
+        function showLoveScreen() {
+            document.body.innerHTML = `
+                <div class="love-screen">
+                    <h1>¡Sabía que dirías que sí! ❤️💕</h1>
+                    <img src="2.png" height="300px" width="300px"> 
+                    <h2 class="love-message">Te quiero mucho Vale ❤️</h2>
+                </div>
+            `;
+
+            // Crear corazones flotando
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.classList.add("heart");
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.top = Math.random() * window.innerHeight + "px";
+                heart.style.animationDuration = Math.random() * 5 + 2 + "s";
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 10000);
+            }
+        }
+    </script>
+
+</body>
+</html>
